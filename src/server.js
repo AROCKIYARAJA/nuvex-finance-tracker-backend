@@ -44,6 +44,6 @@ app.use(errorHandler);
 // Start
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log(`🚀 Nuvex API running on http://localhost:${PORT}`);
+    console.log(`🚀 Nuvex API running on https://nuvex-finance-tracker-backend-production.up.railway.app/`);
   });
 });
