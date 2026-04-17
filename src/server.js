@@ -72,8 +72,8 @@ app.get("/api/health", (_req, res) => {
     <body>
       <div class="card">
         <div class="status">✅ API Health: Working Good</div>
-        <div class="time">UTC Time: ${new Date().toISOString}</div>
-        <div class="time">Local Time: ${new Date().toISOString}</div>
+        <div class="time">UTC Time: ${new Date().toISOString()}</div>
+        <div class="time">Local Time: ${new Date()}</div>
       </div>
     </body>
     </html>
