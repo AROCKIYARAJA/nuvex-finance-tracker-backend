@@ -49,7 +49,7 @@ const getInvestmentSummary = asyncHandler(async (_req, res) => {
   });
 });
 
-const deleteAll = asyncHandler(async () => {
+const deleteAll = asyncHandler(async (_req,res) => {
   clearDataBase()
   success(res, { message: "successfully erased all data" })
 })
