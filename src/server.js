@@ -33,8 +33,18 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/reset-all", dashboardRoutes)
 
 // Health check
+// For machines (Postman, monitoring tools)
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
+  res.json({
+    status: "ok",
+    time: new Date().toISOString(),
+    localTime: new Date()
+  });
+});
+
+// For browser UI
+app.get("/health", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "health.html"));
 });
 
 // Error handling
