@@ -51,7 +51,7 @@ const getInvestmentSummary = asyncHandler(async (_req, res) => {
 
 const deleteAll = asyncHandler(async (_req, res) => {
   clearDataBase()
-  success(res, { message: "successfully erased all data" })
+  success(res, { success: true, message: "successfully erased all data" })
 })
 
 module.exports = { getCashflowSummary, getInvestmentSummary, deleteAll };
