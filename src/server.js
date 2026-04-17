@@ -42,8 +42,22 @@ app.use(notFound);
 app.use(errorHandler);
 
 // Start
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`🚀 Nuvex API running on http://localhost:${PORT}`);
-  });
-});
+// connectDB().then(() => {
+//   app.listen(PORT, () => {
+//     console.log(`🚀 Nuvex API running on http://localhost:${PORT}`);
+//   });
+// });
+
+let isConnected = false;
+
+const initDB = async () => {
+  if (!isConnected) {
+    await connectDB();
+    isConnected = true;
+  }
+};
+
+module.exports = async (req, res) => {
+  await initDB();
+  return app(req, res);
+};
