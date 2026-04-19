@@ -4,6 +4,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const { connectDB } = require("./config/db");
 const { errorHandler, notFound } = require("./middleware/errorHandler");
+const requestIp = require("request-ip");
+
 
 // Route imports
 const profileRoutes = require("./routes/profileRoutes");
@@ -14,6 +16,7 @@ const metalRoutes = require("./routes/metalRoutes");
 const mutualFundRoutes = require("./routes/mutualFundRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const assetsWithdrawRoutes = require("./routes/assetWithdrawalRoutes");
+const locationDetectorRoutes = require("./routes/locationDetector");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +25,8 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(requestIp.mw());
+
 
 // API Routes
 app.use("/api/profile", profileRoutes);
@@ -33,6 +38,7 @@ app.use("/api/mutual-funds", mutualFundRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/reset-all", dashboardRoutes);
 app.use("/api/metals", assetsWithdrawRoutes);
+app.use("/api/entry-detection", locationDetectorRoutes);
 
 // Health check
 app.get("/api/health", (_req, res) => {
@@ -92,3 +98,5 @@ connectDB().then(() => {
     console.log(`🚀 Nuvex API running on https://nuvex-finance-tracker-backend-production.up.railway.app/`);
   });
 });
+
+
