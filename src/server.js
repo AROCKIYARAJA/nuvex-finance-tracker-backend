@@ -13,6 +13,7 @@ const incomeRoutes = require("./routes/incomeRoutes");
 const metalRoutes = require("./routes/metalRoutes");
 const mutualFundRoutes = require("./routes/mutualFundRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const assetsWithdrawRoutes = require("./routes/assetWithdrawalRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,7 +31,8 @@ app.use("/api/incomes", incomeRoutes);
 app.use("/api/metals", metalRoutes);
 app.use("/api/mutual-funds", mutualFundRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/reset-all", dashboardRoutes)
+app.use("/api/reset-all", dashboardRoutes);
+app.use("/api/metals", assetsWithdrawRoutes);
 
 // Health check
 app.get("/api/health", (_req, res) => {
