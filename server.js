@@ -23,7 +23,7 @@ app.use("/api/pf", require("./routes/pfRoutes"));
 app.use("/api/networth", require("./routes/networthRoutes"));
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 
-app.get("/api/health", (_req, res) => {
+app.get("/", (_req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html>
