@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://localhost:27017/nuvex")
+  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/nuvex")
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB error:", err));
 
