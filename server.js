@@ -71,4 +71,7 @@ app.get("/", (_req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Nuvex API running on https://nuvex-finance-tracker-backend-production.up.railway.app/`));
+app.listen(PORT, () => {
+  console.log(`🚀 Nuvex API running on https://nuvex-finance-tracker-backend.vercel.app`)
+}
+);
