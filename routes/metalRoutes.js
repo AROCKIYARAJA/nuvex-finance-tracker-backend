@@ -1,9 +1,4 @@
-const router = require("express").Router();
-const c = require("../controllers/metalController");
-router.get("/", c.getAll);
-router.post("/", c.create);
-router.delete("/:id", c.remove);
-router.post("/withdraw", c.withdraw);
-router.get("/withdrawals", c.getWithdrawals);
-router.put("/update-price", c.updatePrice);
-module.exports = router;
+const r = require("express").Router(); const c = require("../controllers/metalController");
+r.get("/", c.getAll); r.post("/", c.create); r.delete("/:id", c.remove);
+r.post("/withdraw", c.withdraw); r.get("/withdrawals", c.getWithdrawals); r.put("/update-price", c.updatePrice);
+module.exports = r;

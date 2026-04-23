@@ -1,5 +1,3 @@
 const mongoose = require("mongoose");
-module.exports = mongoose.model("Profile", new mongoose.Schema({
-  name: { type: String, default: "" },
-  email: { type: String, default: "" },
-}, { timestamps: true }));
+const schema = new mongoose.Schema({ name: String, email: String }, { timestamps: true });
+module.exports = mongoose.model("Profile", schema);

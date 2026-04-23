@@ -1,6 +1,2 @@
-const router = require("express").Router();
-const c = require("../controllers/expenseController");
-router.get("/", c.getAll);
-router.post("/", c.create);
-router.delete("/:id", c.remove);
-module.exports = router;
+const r = require("express").Router(); const c = require("../controllers/expenseController");
+r.get("/", c.getAll); r.post("/", c.create); r.delete("/:id", c.remove); module.exports = r;

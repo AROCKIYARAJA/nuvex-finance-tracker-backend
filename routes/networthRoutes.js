@@ -1,6 +1,3 @@
-const router = require("express").Router();
-const c = require("../controllers/networthController");
-router.get("/", c.getAll);
-router.post("/", c.create);
-router.get("/snapshot", c.snapshot);
-module.exports = router;
+const r = require("express").Router(); const c = require("../controllers/networthController");
+r.get("/", c.getAll); r.post("/", c.create); r.get("/snapshot", c.snapshot);
+module.exports = r;

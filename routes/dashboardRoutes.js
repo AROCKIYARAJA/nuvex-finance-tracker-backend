@@ -1,7 +1,4 @@
-const router = require("express").Router();
-const c = require("../controllers/dashboardController");
-router.get("/cashflow", c.cashflow);
-router.get("/top-spending", c.topSpending);
-router.get("/recent-transactions", c.recentTransactions);
-router.get("/investments", c.investments);
-module.exports = router;
+const r = require("express").Router(); const c = require("../controllers/dashboardController");
+r.get("/cashflow", c.cashflow); r.get("/top-spending", c.topSpending);
+r.get("/recent-transactions", c.recentTransactions); r.get("/investments", c.investments);
+module.exports = r;

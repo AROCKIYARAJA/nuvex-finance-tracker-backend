@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
-module.exports = mongoose.model("Metal", new mongoose.Schema({
+const schema = new mongoose.Schema({
   type: { type: String, enum: ["gold", "silver"], required: true },
   quantity: { type: Number, required: true },
   buyingPrice: { type: Number, required: true },
-  purchaseDate: { type: String, required: true },
-  notes: { type: String, default: "" },
-}, { timestamps: true }));
+  purchaseDate: String,
+  notes: String,
+}, { timestamps: true });
+module.exports = mongoose.model("Metal", schema);

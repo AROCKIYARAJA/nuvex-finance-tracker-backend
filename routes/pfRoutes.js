@@ -1,6 +1,3 @@
-const router = require("express").Router();
-const c = require("../controllers/pfController");
-router.get("/", c.getAll);
-router.post("/", c.create);
-router.get("/total", c.getTotal);
-module.exports = router;
+const r = require("express").Router(); const c = require("../controllers/pfController");
+r.get("/", c.getAll); r.post("/", c.create); r.get("/total", c.getTotal);
+module.exports = r;
