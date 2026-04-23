@@ -2,6 +2,9 @@ const Networth = require("../models/Networth");
 const Metal = require("../models/Metal");
 const MutualFund = require("../models/MutualFund");
 const PF = require("../models/PF");
+const { cashflow } = require("./dashboardController");
+const Expense = require("../models/Expense");
+const Income = require("../models/Income");
 
 exports.getAll = async (req, res) => {
   try { res.json({ data: await Networth.find().sort({ createdAt: -1 }) }); }
@@ -9,7 +12,9 @@ exports.getAll = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  try { res.status(201).json({ data: await Networth.create(req.body) }); }
+  try {
+    res.status(201).json({ data: await Networth.create(req.body) });
+  }
   catch (e) { res.status(500).json({ error: e.message }); }
 };
 
@@ -38,13 +43,16 @@ exports.snapshot = async (req, res) => {
       totalAmount: f.currentValue || 0,
     }));
 
+    const [expenses, incomes] = await Promise.all([Expense.find(), Income.find()]);
+    const totalExpenses = expenses.reduce((s, e) => s + e.amount, 0);
+    const totalIncome = incomes.reduce((s, i) => s + i.amount, 0);
+    const bankLiquidityAmount = totalIncome - totalExpenses
     const fundsTotal = fundSnapshots.reduce((s, f) => s + f.totalAmount, 0);
-    const networth = goldInvested + silverInvested + fundsTotal + pfTotal;
+    const networth = goldInvested + silverInvested + fundsTotal + pfTotal + bankLiquidityAmount;
 
     // Growth = current networth - last recorded networth
-    const lastEntry = await Networth.findOne().sort({ createdAt: -1 });
-    const growth = lastEntry ? networth - (lastEntry.networth || 0) : 0;
-
+    const lastEntry = await Networth.find();
+    const growth = lastEntry.length <= 1 ? 0 : lastEntry[lastEntry.length - 2].networth - lastEntry[lastEntry.length - 1].networth
     const snapshot = {
       date: new Date().toISOString(),
       metals: {
@@ -52,7 +60,7 @@ exports.snapshot = async (req, res) => {
         silver: { grams: silverGrams, percentage: 0, invested: silverInvested, returns: 0, totalAmount: silverInvested },
       },
       funds: fundSnapshots,
-      bankLiquidity: 0,
+      bankLiquidity: bankLiquidityAmount,
       pfAmount: pfTotal,
       networth,
       growth,
