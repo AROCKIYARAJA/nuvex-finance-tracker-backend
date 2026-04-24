@@ -46,11 +46,9 @@ exports.snapshot = async (req, res) => {
     const [expenses, incomes] = await Promise.all([Expense.find(), Income.find()]);
     const totalExpenses = expenses.reduce((s, e) => s + e.amount, 0);
     const totalIncome = incomes.reduce((s, i) => s + i.amount, 0);
-    const bankLiquidityAmount = totalIncome - totalExpenses
+    const bankLiquidityAmount = totalIncome - totalExpenses;
     const fundsTotal = fundSnapshots.reduce((s, f) => s + f.totalAmount, 0);
     const networth = goldInvested + silverInvested + fundsTotal + pfTotal + bankLiquidityAmount;
-    const lastEntry = await Networth.find();
-    const growth = lastEntry.length <= 1 ? 0 : lastEntry[lastEntry.length - 2].networth - lastEntry[lastEntry.length - 1].networth
     const snapshot = {
       date: new Date().toISOString(),
       metals: {
@@ -61,7 +59,7 @@ exports.snapshot = async (req, res) => {
       bankLiquidity: bankLiquidityAmount,
       pfAmount: pfTotal,
       networth,
-      growth,
+      growth: 0,
     };
 
     res.json({ data: snapshot });
