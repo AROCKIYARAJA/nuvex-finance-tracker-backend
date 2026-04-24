@@ -49,8 +49,6 @@ exports.snapshot = async (req, res) => {
     const bankLiquidityAmount = totalIncome - totalExpenses
     const fundsTotal = fundSnapshots.reduce((s, f) => s + f.totalAmount, 0);
     const networth = goldInvested + silverInvested + fundsTotal + pfTotal + bankLiquidityAmount;
-
-    // Growth = current networth - last recorded networth
     const lastEntry = await Networth.find();
     const growth = lastEntry.length <= 1 ? 0 : lastEntry[lastEntry.length - 2].networth - lastEntry[lastEntry.length - 1].networth
     const snapshot = {
