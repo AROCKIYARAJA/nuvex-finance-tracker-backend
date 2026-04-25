@@ -65,3 +65,11 @@ exports.snapshot = async (req, res) => {
     res.json({ data: snapshot });
   } catch (e) { res.status(500).json({ error: e.message }); }
 };
+
+exports.remove = async (req, res) => {
+  try {
+    const doc = await Networth.findByIdAndDelete(req.params.id);
+    if (!doc) return res.status(404).json({ error: "Networth entry not found" });
+    res.json({ data: { id: doc._id, deleted: true } });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+};
