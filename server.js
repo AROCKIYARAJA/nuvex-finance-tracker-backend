@@ -56,7 +56,7 @@ app.get("/", (_req, res) => {
     </head>
     <body>
       <div class="card">
-        <div class="status">✅ API Health: Working Good</div>
+        <div class="status">✅ API Health: Working Good, Update Count: 32</div>
         <div class="time">Time: ${new Date().toLocaleString()}</div>
       </div>
     </body>
