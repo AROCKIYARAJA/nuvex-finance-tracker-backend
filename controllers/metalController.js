@@ -31,5 +31,7 @@ exports.updatePrice = async (req, res) => {
     if (!assetType || !pricePerGram) return res.status(400).json({ error: "assetType and pricePerGram required" });
     const result = await Metal.updateMany({ type: assetType }, { $set: { buyingPrice: pricePerGram } });
     res.json({ data: { modified: result.modifiedCount } });
-  } catch (e) { res.status(500).json({ error: e.message }); }
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 };
